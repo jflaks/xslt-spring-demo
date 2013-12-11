@@ -27,6 +27,12 @@
 		</xsl:if>
 	</xsl:template>
 	
+	<xsl:template match="building[descendant::person]" mode="grave"> 
+		<xsl:if test="count(.//zombie) &lt; 3">
+			<xsl:apply-templates select=".//person" mode="extractPersonReject" />
+		</xsl:if>
+	</xsl:template>
+	
 	<xsl:template name="removeTrailingCommaAndSpace">
 		<xsl:param name="string" />		
 		<xsl:variable name="normalized" select="normalize-space($string)" />
@@ -35,8 +41,22 @@
 		</xsl:if>
 	</xsl:template>
 	
+	<xsl:template match="person" mode="extractPersonReject">
+		<xsl:variable name="stateTrooperCheck" select="transformContext:checkHealth($transformContext,@name,@greeting)" />
+		<xsl:if test="$stateTrooperCheck != 'Fine'">
+			{"description" : "<xsl:value-of select="$stateTrooperCheck" />"},
+		</xsl:if>
+	</xsl:template>
+	
 	<xsl:template match="person" mode="extractPerson">
-		<xsl:variable name="stateTrooperCheck" select="transformContext:checkHealth($transformContext,@name,@response)" />
-		{name2 : <xsl:value-of select="@name" />},
+		<xsl:variable name="stateTrooperCheck" select="transformContext:checkHealth($transformContext,@name,@greeting)" />
+		<xsl:choose>
+		<xsl:when test="$stateTrooperCheck = 'Fine'">
+			{"name" : "<xsl:value-of select="@name" />" },
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:message terminate="no"><xsl:value-of select="$stateTrooperCheck" /></xsl:message>
+		</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 </xsl:stylesheet>
