@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<town>
+	<person name="Jim" />
+	<zombie description="shambling figure" />
+	<zombie description="one legged zombie" />
+	<building name="farmhouse">
+		<kitchen>
+			<person name="Barbara" greeting="Help!" />
+		</kitchen>
+		<cellar>
+			<person name="Bob" greeting="Thank god!" />
+			<person name="Johnny" greeting="arrrrg" />
+			<zombie description="Pleased looking zombie" />
+		</cellar>
+	</building>
+	
+	<building name="gas_station">
+		<office>
+			<person name="Ken" greeting="Oh no!" />
+		</office>
+		<back_room>
+			<zombie description="Zombie with trench coat" />
+			<person name="Jeff" greeting="I need to get out of here" />
+			<closet>
+				<zombie description="Lurking zombie" />
+				<zombie description="Zombie with closed eyes" />
+			</closet>
+		</back_room>
+	</building>
+	
+	<building name="abandoned_pub">
+		<zombie description="Drunk zombie" />
+	</building>
+	
+	<person name="Will" />
+</town>
