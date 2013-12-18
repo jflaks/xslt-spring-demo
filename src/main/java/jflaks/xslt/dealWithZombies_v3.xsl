@@ -32,6 +32,6 @@
 	</xsl:template>
 	
 	<xsl:template match="person" mode="extractPerson">
-		{name2 : <xsl:value-of select="@name" />},
+		{name : <xsl:value-of select="@name" />},
 	</xsl:template>
 </xsl:stylesheet>
